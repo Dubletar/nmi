@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns:ng="http://angularjs.org" ng-app="valencepm" id="ng-app" lang="{{ app.request.locale }}">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta charset="UTF-8" />
+    <title>
+        ValencePM Test
+    </title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+        {% stylesheets
+        '@AppBundle/Resources/public/css/valencepm.css'
+        filter='cssrewrite'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+
+    {% block javascripts -%}
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        {% javascripts
+            '@AppBundle/Resources/public/js/valencepm.js'
+            '@AppBundle/Resources/public/js/barcode.js'
+            '@AppBundle/Resources/public/js/naturalSortModule.js'
+            '@AppBundle/Resources/public/js/upload/*'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+    <div class="pageContainer" ng-controller="barcodeController">
+        <div class="contentContainer">
+            <h2>PDF Documents</h2>
+            <div class="alert alert-info">
+                <strong>Upload more PDF files: </strong>
+                <button
+                    ngf-select="uploadFiles($files, $invalidFiles)"
+                    multiple
+                    accept="application/pdf"
+                    ngf-max-height="1000"
+                    ngf-max-size="1MB"
+                >
+                    Select Files
+                </button>
+            </div>
+            <div ng-show="files.length > 0">
+                Files:
+                <ul>
+                    <li ng-repeat="f in files" style="font:smaller">{[{f.name}]} {[{f.$errorParam}]}
+                        <span class="progress" ng-show="f.progress >= 0">
+                            <div
+                                style="width:{[{f.progress}]}%"
+                                ng-bind="f.progress + '%'"
+                            >
+                            </div>
+                        </span>
+                    </li>
+                    <li ng-repeat="f in errFiles" style="font:smaller">{[{f.name}]} {[{f.$error}]} {[{f.$errorParam}]}
+                    </li>
+                </ul>
+            </div>
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Document</th>
+                        <th>Barcode</th>
+                        <th>Format</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, row) in data">
+                        <td>{[{ key + 1 }]}</td>
+                        <td>{[{ row.name }]}</td>
+                        <td>{[{ row.message.text }]}</td>
+                        <td>{[{ row.message.format }]}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

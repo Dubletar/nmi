@@ -1,4 +1,4 @@
-var app = angular.module('valencepm', ['naturalSort'])
+var app = angular.module('valencepm', ['naturalSort', 'ngFileUpload'])
 
 /* Identify angular code within Twig template. */
 .config(function($interpolateProvider){
@@ -35,44 +35,11 @@ var app = angular.module('valencepm', ['naturalSort'])
                 }
             })
             .error(function(data) {
-                this.alertError();
+                self.alertError();
             });
     };
 
     this.alertError = function () {
         alert("Sorry, something has gone wrong.");
     };
-})
-
-/* Setup the controller to control the data on the page. */
-.controller('testController', ['$scope', 'BaseService', '$filter', '$rootScope', function($scope, $BaseService, $filter, $rootScope) {
-
-    $scope.testRoute = "valencepm_data";
-    $scope.data = [];
-    $scope.originalData = [];
-    $scope.baseService = $BaseService;
-    $scope.sortClass = "unit";
-
-    $scope.init = function () {
-        $scope.grabData();
-    };
-
-    $scope.grabData = function () {
-        var route = Routing.generate($scope.testRoute);
-        $scope.baseService.sendRequest($scope, 'get', route, false, false, $scope.applyData);
-    };
-
-    $scope.applyData = function (data) {
-        $scope.data = data.data;
-        $scope.originalData = data.originalData;
-    };
-
-    $scope.sortData = function (sortOption) {
-        $scope.sortClass = sortOption;
-        var data = $scope.data;
-        $scope.data = $filter('orderBy')(data, $rootScope.natural(sortOption));
-    };
-
-    $scope.init();
-
-}]);
+});

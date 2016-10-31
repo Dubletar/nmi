@@ -2,6 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Service\PDFService;
+use RobbieP\ZbarQrdecoder\ZbarDecoder;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use UtilityBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -59,5 +63,51 @@ class AppController extends AbstractController
             "data" => $data,
             "originalData" => $originalData
         ));
+    }
+
+    /**
+     * @Route("/valencepm/bar-code-test", name="bar_code_test", options={"expose":true})
+     *
+     * @return Response
+     */
+    public function valencePMBarCodeTestAction()
+    {
+        return $this->render("AppBundle:ValencePM:barcode.html.twig");
+    }
+
+    /**
+     * @Route("/valencepm/bar-code-data", name="bar_code_data", options={"expose":true})
+     *
+     * @return Response
+     */
+    public function valencePMBarCodeDataAction()
+    {
+        /* @var $pdfService PDFService */
+        $pdfService = $this->get("pdf.service");
+        $data = $pdfService->getEstablishedPDFCodes();
+
+        return $this->createJmsResponse($data);
+    }
+
+    /**
+     * @Route("/valencepm/upload-barcode-pdfs", name="upload_barcode_pdfs", options={"expose":true})
+     *
+     * @param $request Request
+     * @return Response
+     */
+    public function uploadPDFsAction(Request $request)
+    {
+        $files = $request->files;
+
+        if (!$files || empty($files)) {
+            return $this->createJmsResponse(false);
+        }
+
+        /* @var $pdfService PDFService */
+        $pdfService = $this->get("pdf.service");
+
+        $data = $pdfService->scanUploads($files);
+
+        return $this->createJmsResponse($data);
     }
 }
