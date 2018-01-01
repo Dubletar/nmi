@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{%  endblock %}
+
+{% block body %}
+    {% include 'AppBundle:nav_bar:nav.html.twig' with {'current': 5} %}
+    <section class="problem-header">
+        <h1>Answers: Problem Five</h1>
+    </section>
+    <section class="problem-5">
+        <div class="heading">
+            <a href="#819">Please see lines 829 - 833</a>
+        </div>
+        {% for key,line in file %}
+            <div
+                {% if key == 819 %}id="819"{% endif %}
+                {% if key >= 829 and key <= 833 %}style="font-weight: bold"{% endif %}
+            >
+                Line {{ key }}: {{ line }}
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

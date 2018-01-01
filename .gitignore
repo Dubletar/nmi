@@ -20,3 +20,5 @@
 
 # Assets
 /web/bundles/
+
+/node_modules

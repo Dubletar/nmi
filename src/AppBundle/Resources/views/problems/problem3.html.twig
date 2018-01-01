@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{%  endblock %}
+
+{% block body %}
+    {% include 'AppBundle:nav_bar:nav.html.twig' with {'current': 3} %}
+    <section class="problem-header">
+        <h1>Answers: Problem Three</h1>
+    </section>
+    <section class="problem-3">
+        function myFunction (int x)<br/>
+        {<br/>
+        &#9;if ((x & 1) == 0) {<br/>
+        &#9;&#9;return true;<br/>
+        &#9;} else {<br/>
+        &#9;&#9;return false;<br/>
+        &#9;}<br/>
+        }<br/><br/>
+        This function returns true when both $a and &b bits are set, then checks the equivalency of the values; otherwise it returns false.
+    </section>
+{% endblock %}

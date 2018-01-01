@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{%  endblock %}
+
+{% block body %}
+    {% include 'AppBundle:nav_bar:nav.html.twig' with {'current': 4} %}
+    <section class="problem-header">
+        <h1>Answers: Problem Four</h1>
+    </section>
+    <section class="problem-4">
+        {% for key,result in results %}
+            <div class="multiple-header">Multiples of {{ key }}</div>
+            <div class="multiple-children">
+                {% for row in result %}
+                    <div>{{ row }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

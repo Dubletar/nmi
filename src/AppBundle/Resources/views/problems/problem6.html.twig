@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{%  endblock %}
+
+{% block body %}
+    {% include 'AppBundle:nav_bar:nav.html.twig' with {'current': 6} %}
+    <section class="problem-header">
+        <h1>Answers: Problem Six</h1>
+    </section>
+    <section class="problem-6">
+        {% for key,line in lines %}
+            <div>
+                Line {{ key }}:
+                {% if line < 10 %}
+                    {% set lineValue = '0000'~line %}
+                {% elseif line < 100 %}
+                    {% set lineValue = '000'~line %}
+                {% elseif line < 1000 %}
+                    {% set lineValue = '00'~line %}
+                {% elseif line < 10000 %}
+                    {% set lineValue = '0'~line %}
+                {% else %}
+                    {% set lineValue = line %}
+                {% endif %}
+                {{ lineValue }}
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{%  endblock %}
+
+{% block body %}
+    {% include 'AppBundle:nav_bar:nav.html.twig' with {'current': 1} %}
+    <section class="problem-header">
+        <h1>Answers: Problem One</h1>
+    </section>
+    <section class="problem-1">
+        {% for row in result %}
+            <div>Line {{ row.row }}: {{ row.minPrice }}</div>
+        {% endfor %}
+    </section>
+{% endblock %}

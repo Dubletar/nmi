@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{%  endblock %}
+
+{% block body %}
+    {% include 'AppBundle:nav_bar:nav.html.twig' with {'current': 2} %}
+    <section class="problem-header">
+        <h1>Answers: Problem Two</h1>
+    </section>
+    <section class="problem-2">
+        {{ query }}
+    </section>
+{% endblock %}

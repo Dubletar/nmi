@@ -1,1 +1,35 @@
-Thank you for visiting the site! I'm currently revamping things... will be back soon!
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{%  endblock %}
+
+{% block body %}
+    <section class="profile">
+        <div class="home-adam-icon">
+            <img src="https://scontent-ort2-1.xx.fbcdn.net/v/t1.0-9/8364_10153302537936652_6952287473020253400_n.jpg?oh=a1e3063ea743740bd65ec56a4a36133a&oe=5AFC8495"/>
+        </div>
+        <h1>Adam Velma</h1>
+    </section>
+    <section class="problems-list">
+        <div class="answers-header">Answers</div>
+        <a href="{{ path('problem 1') }}">
+            <div class="problem-list-item">Problem 1</div>
+        </a>
+        <a href="{{ path('problem 2') }}">
+            <div class="problem-list-item">Problem 2</div>
+        </a>
+        <a href="">
+            <div class="problem-list-item">Problem 3</div>
+        </a>
+        <a href="{{ path('problem 4') }}">
+            <div class="problem-list-item">Problem 4</div>
+        </a>
+        <a href="{{ path('problem 5') }}">
+            <div class="problem-list-item">Problem 5</div>
+        </a>
+        <a href="{{ path('problem 6') }}">
+            <div class="problem-list-item">Problem 6</div>
+        </a>
+    </section>
+{% endblock %}

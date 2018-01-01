@@ -1,0 +1,25 @@
+{% set prev = (current - 1) > 0 ? 'problem ' ~ (current - 1) : false %}
+{% set next = (current + 1) < 7 ? 'problem ' ~ (current + 1) : false %}
+
+<section class="navigation">
+    <div class="mini-profile">
+        <img src="https://scontent-ort2-1.xx.fbcdn.net/v/t1.0-9/8364_10153302537936652_6952287473020253400_n.jpg?oh=a1e3063ea743740bd65ec56a4a36133a&oe=5AFC8495"/>
+    </div>
+    <div class="pager-container">
+        <div class="previous">
+            {% if prev %}
+                <a href="{{ path(prev) }}"><< prev</a>
+            {% elseif (current - 1) == 0 %}
+                <a href="{{ path('index') }}"><< prev</a>
+            {% endif %}
+        </div>
+        <div class="current">
+            Problem {{ current }}
+        </div>
+        <div class="next">
+            {% if next %}
+                <a href="{{ path(next) }}">next >></a>
+            {% endif %}
+        </div>
+    </div>
+</section>

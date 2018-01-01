@@ -61,7 +61,7 @@ class JsonResponseHelper
     ) {
         $data = $this->buildData($success, $message, $additionalData, $translationDomain);
 
-        return new JsonResponse($data, $status, $headers);
+        return new JsonResponse(json_encode($data), $status, $headers, true);
     }
 
     /**
