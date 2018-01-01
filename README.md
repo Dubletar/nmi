@@ -14,11 +14,11 @@ src/AppBundle/Resources/public/assets
 Installation
 ==
 
-* Prerequisites: gulp, composer.
-* Clone this repository.
+* Prerequisites: gulp, composer, npm.
+* Clone this repository. Set the root in apache at [project folder]/web
 * Run these commands:
 ```
-#Install the project
+#Install the project (press enter when asked for settings to use defaults.
 $ composer install
 
 #Update cache permissions (Linux)
